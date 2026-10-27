@@ -35,7 +35,7 @@ def draw_board():
             pg.quit()
         elif event.type==pg.KEYDOWN and event.key==pg.K_q :
             pg.quit()
-direction=(1,0)
+
 
 def move_snake(snake, direction):
     snake.pop(0)
@@ -51,14 +51,23 @@ pg.init()
 screen=pg.display.set_mode((600,600))
 clock=pg.time.Clock()
 while True:
+    for event in pg.event.get():
+        if event.type==pg.KEYDOWN and event.key==pg.K_UP:
+            direction=(0,-1)
+        if event.type==pg.KEYDOWN and event.key==pg.K_DOWN:
+            direction=(0,1)
+        if event.type==pg.KEYDOWN and event.key==pg.K_LEFT:
+            direction=(-1,0)
+        if event.type==pg.KEYDOWN and event.key==pg.K_RIGHT:
+            direction=(1,0)
     clock.tick(2)
     draw_board()
     draw_snake(snake)
     move_snake(snake,direction)
     pg.display.update()
 
-#Quand le serpent atteint le bord de la fenêtre il continue à avancer jusqu'à disparaître
-    
+
+#La direction est (0,-1) car l'axe des y est orienté vers le bas
 
 
 
